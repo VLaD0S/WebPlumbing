@@ -32,8 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'app',
-    # Add your apps here to enable them
+    'plumbing',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -123,4 +122,15 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+BOOSTRAP_DIR = os.path.join(BASE_DIR, "styling/bootstrap/dist")
+JQUERY_DIR = os.path.join(BASE_DIR, "styling/jquery")
+TETHER_DIR = os.path.join(BASE_DIR, "styling/tether/dist")
+
+
 STATIC_ROOT = posixpath.join(*(BASE_DIR.split(os.path.sep) + ['static']))
+
+STATICFILES_DIRS = [
+    BOOSTRAP_DIR,
+    JQUERY_DIR,
+    TETHER_DIR,
+    ]

@@ -1,0 +1,35 @@
+﻿{% extends "_layout.html" %}
+{% load staticfiles %}
+<!DOCTYPE>
+
+{% block body_block %}
+<head>
+    <meta charset="utf-8" />
+    <!-- for all other styling  -->
+    <link rel="stylesheet" href="{% static "css/index_stylesheet.css" %}" / >
+   
+    <!-- for adding background images to the columns.-->
+</head>
+
+{% include "_carousel.html" %}
+    
+    <div class="container">
+
+    <br />
+        
+
+            <div class="row">
+                <div class="col-md-9 box">
+                    <div class="inner">Hello</div>
+                </div>
+
+                <div class="col-md-3 box">
+                    <div class="inner">Hello</div>
+                </div>
+            </div>
+
+        <br />
+        </div>
+
+{% endblock %}
+
