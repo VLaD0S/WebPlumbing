@@ -13,6 +13,13 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 import os
 import posixpath
 
+#celery imports
+from celery.schedules import crontab
+
+
+
+
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -32,8 +39,11 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django_cron',
+    #custom apps
+    'django_celery_results',
+    'django_celery_beat',
     'plumbing',
+    #basics
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -128,6 +138,19 @@ STATIC_URL = '/static/'
 STATIC_ROOT = posixpath.join(*(BASE_DIR.split(os.path.sep) + ['static']))
 
 
-CRON_CLASSES =  [
-    "plumbing.data_grabber.MyCronJob",
-    ]
+# Celery & Broker settings
+CELERY_BROKER_URL = "amqp://localhost"
+CELERY_RESULTS_BACKEND = "amqp://localhost" 
+
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'Europe/London'
+'''
+CELERY_BEAT_SCHEDULE = {
+    'task-number-one': {
+        'task': 'plumbing.tasks.populate_reviews',
+        'schedule': crontab(minute='*/1')
+    }
+}
+'''

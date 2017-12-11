@@ -39,6 +39,9 @@
     <Compile Include="app\migrations\__init__.py" />
     <Compile Include="image_resizer.py" />
     <Compile Include="manage.py" />
+    <Compile Include="plumbing\addtask.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="plumbing\admin.py" />
     <Compile Include="plumbing\apps.py" />
     <Compile Include="plumbing\data_grabber.py">
@@ -49,13 +52,12 @@
     <Compile Include="plumbing\review_extractor.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="plumbing\tasks.py" />
     <Compile Include="plumbing\tests.py" />
-    <Compile Include="plumbing\text_cron.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="plumbing\urls.py" />
     <Compile Include="plumbing\views.py" />
     <Compile Include="plumbing\__init__.py" />
+    <Compile Include="WebPlumbing\celery.py" />
     <Compile Include="WebPlumbing\__init__.py" />
     <Compile Include="WebPlumbing\settings.py" />
     <Compile Include="WebPlumbing\urls.py" />
