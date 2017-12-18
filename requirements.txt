@@ -2,3 +2,8 @@ Django==1.11.6
 celery==4.1.0
 beautifulsoup4==4.6.0
 wget==3.2
+django-celery-beat==1.1.0
+django-celery-results==1.0.1
+django-common-helpers==0.9.1
+Faker==0.8.6
+
