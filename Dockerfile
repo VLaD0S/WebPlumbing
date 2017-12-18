@@ -13,6 +13,8 @@ RUN pip install -r requirements.txt
 
 COPY . /usr/src/app
 
-CMD ["./Scripts/run_django.sh"]
+#CMD ["./Scripts/run_django.sh"]
 
+# create unprivileged user
+RUN adduser --disabled-password --gecos '' myuser  
 

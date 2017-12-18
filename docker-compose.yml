@@ -18,6 +18,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    hostname: plumbing
+    command: ./Scripts/run_django.sh
     volumes:
       - .:/usr/src/app
     ports:
@@ -33,4 +35,4 @@ services:
       - RABBITMQ_DEFAULT_PASS=mypass
     ports:
       - "5672:5672"
-      - "15672:15672"
+      - "15672:15672":
