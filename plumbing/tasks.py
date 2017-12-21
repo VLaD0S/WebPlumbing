@@ -1,60 +1,78 @@
 from __future__ import absolute_import, unicode_literals
 import os
 import django
+import urllib.request
 
 #model imports
 from plumbing.models import Review
-import string
+
 
 #Celery imports
 from celery import task
 from celery import shared_task
-from celery import Celery
+
 
 #Pulling reviews soup/wget imports
 from bs4 import BeautifulSoup
 import wget
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'WebPlumbin.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'WebPlumbing.settings')
 django.setup()
 
 
-##getting reviews from MyBuilder
-file_url = "https://www.mybuilder.com/profile/view/fgneacsu/feedback"
-reviews_name = "reviews.html"
 
-''' The following methods are responsible for downloading the HTML page specified in the file URL,
-navigating through it, extracting the relevant bits and populating the DB with the info.    
+
+''' 
+***
+
+
+The following methods are responsible for downloading the HTML page specified in the file URL,
+navigating through it, extracting the relevant bits and populating the DB with the info.  
+
+
+@SECURITY THREAT!!
+
+
+***NEEDS UNIT TESTING - is highly dependant on the naming conventions used on the main site
+in order to extract the data correctly.
+  
 '''
 
-#Creates soup. returns it
-def createSoup(url, file):
-    file_name = wget.download(url, file)
-    html_content = open(file, "r")
-    return BeautifulSoup(html_content, 'html.parser')
 
-#calls createSoup to pull reviews. Returns them in a review_box
-def pullReviews():
-    try:
-        os.remove(reviews_name)
-        print("New reviews loaded...")
-    except FileNotFoundError:
-        print("No Old reviews loaded. Pulling data...")
+#getting reviews from MyBuilder
+mybuilder_url = "https://www.mybuilder.com/profile/view/fgneacsu/feedback"
+reviews_name = "reviews.html"
 
-    review_box = createSoup(file_url, reviews_name).find_all("div", attrs={'itemprop':'review'})
-    print("Data successfully pulled")
-    return review_box
-    
 
-#creates a review, given the params.
-def reviewCreator(desc, auth, dt):
+#creates a delicious soup
+def createsoup(url):
+    local_filename, headers = urllib.request.urlretrieve(url)
+    reviews_html = open(local_filename)
+    soup = BeautifulSoup(reviews_html, 'html.parser')
+    refined_soup = soup.find_all("div", attrs={'itemprop':'review'})
+    return refined_soup, local_filename
+
+
+#creates a review in the database.
+def reviewCreator(desc, auth, dt, rev_no):
     data = Review.objects.get_or_create(description=desc, author=auth, date=dt)[0]
-    print("Saving Review")
     data.save()
+    print("...saved review .no: " + str(rev_no))
     return data
-    
+
+
+#Deletes html grabbed by urllib
+def tempdelete(file):
+    print("Attempting to delete temporary file")
+    try:
+        os.remove(file)
+        print("Temporary html file deleted successfully!")
+    except FileNotFoundError:
+        print("Failed to remove temporary html file!")
+
+#logic populating the database with reviews
 def populate():
-    review_box = pullReviews()
+    review_box, tempfile_name = createsoup(mybuilder_url)
     count = 0
     for review in review_box:
 
@@ -66,14 +84,18 @@ def populate():
         author = str(review_author.get_text())
         date = str(review_date.get_text())
 
+        reviewCreator(description, author, date, count)
 
-        reviewCreator(description, author, date)       
         count = count + 1
-        print(count)
+
+    tempdelete(tempfile_name)
 
 
 @shared_task(name="populate_reviews")
 def populate_reviews():
     populate()
-    print("population complete")
+    print("Review Table update completed.")
+
+
+
 

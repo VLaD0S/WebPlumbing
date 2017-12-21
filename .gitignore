@@ -18,7 +18,14 @@
 x64/
 x86/
 bld/
-[Bb]in/
+	[nagement plugin started. Port: 15672
+rabbit_1  | 2017-12-18 20:12:36.599 [info] <0.516.0> Statistics database started.
+rabbit_1  |  completed with 3 plugins.
+rabbit_1  | 2017-12-18 20:12:36.743 [info] <0.5.0> Server startup complete; 3 plugins started.
+rabbit_1  |  * rabbitmq_management
+rabbit_1  |  * rabbitmq_management_agent
+rabbit_1  |  * rabbitmq_web_dispatch
+rabbit_1  | 2017-12-18 20:12:37.136 [warning] <0.32.0> lager_Bb]in/
 [Oo]bj/
 [Ll]og/
 
@@ -262,3 +269,13 @@ __pycache__/
 
 # ingoring the virtual environment (env)
 /WebPlumbing/env/
+
+# PyCharm environment tools (pyproj)
+
+*.pyproj
+
+# Django database 
+db.*
+*.sqlite3
+
+
