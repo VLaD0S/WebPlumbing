@@ -1,10 +1,70 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends "_base.html" %}
+{% load staticfiles %}
+
+
+{% block content %}
+<div class="jumbotron jumbotron-fluid text-center" style="background-image:url({% static "images/bath.jpg" %}); background-size: cover; height:720px;margin-bottom: -4em; align-items: center;">
+
+
+    <div style="background-color: rgba(44, 67, 90, 0.5); margin: auto; width: 30em; transform: translateY(60%);">
+        <br>
+        <img id="logo" src="{% static "images/fgn.png" %}", style="height: 7em">
+
+        <div class="text-center">
+            <h2><font color="white">Plumbing & Heating</font></h2>
+        </div>
+        <br>
+    </div>
+
+    <div style="transform: translateY(320%)">
+        <button style="background-color: rgba(255,255,255,0.0); border: 1px solid white; border-radius:5px; padding:0.5em 2em; font-size: 1em; color:white;" type="button">Book a Visit</button>
+    </div>
+
+</div>
+
+
+<nav class="navbar navbar-expand sticky-top navbar-dark" style="background-color: rgba(44, 67, 90, 0.7); height:4em; z-index:0">
+
+         <div class="collapse navbar-collapse">
+             <ul class="navbar-nav mx-auto">
+
+                 <li class="nav-item active">
+                     <a class="nav-link" href="#">Home</a>
+                 </li>
+
+                 <li class="nav-item">
+                     <a class="nav-link" href="#">About</a>
+                 </li>
+                 <li class="nav-item">
+                     <a class="nav-link" href="#">Contact</a>
+                 </li>
+             </ul>
+         </div>
+</nav>
+
+<div style="background-image:url({% static "images/boiler.jpg" %}); background-size:cover; background-attachment: fixed; background-position: center">
+
+    <br>
+    <br>
+
+    <div class="container">
+        {% include "qualifications.html" %}
+    </div>
+
+    <div class="container">
+        {% include "reviews.html" %}
+    </div>
+
+    <br>
+    <br>
+</div>
+
+
+
+{% include "_service_list.html" %}
+
+<br>
+
+
+<!-- end of the content block -->
+{% endblock %}

@@ -1,3 +1,6 @@
 from django.contrib import admin
+from .models import Qualification, Service, Group
 
-# Register your models here.
+admin.site.register(Group)
+admin.site.register(Qualification)
+admin.site.register(Service)
