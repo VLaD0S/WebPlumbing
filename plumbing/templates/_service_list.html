@@ -1,13 +1,103 @@
 
-<div class="container-fluid">
-    <div class="text-center" style="font-size: 1em; background-color: white; border-radius:0.5em;">
+<style>
+.slideanim {visibility:hidden;}
+.slide {
+    /* The name of the animation */
+    animation-name: slide;
+    -webkit-animation-name: slide;
+    /* The duration of the animation */
+    animation-duration: 1s;
+    -webkit-animation-duration: 1s;
+    /* Make the element visible */
+    visibility: visible;
+}
+
+/* Go from 0% to 100% opacity (see-through) and specify the percentage from when to slide in the element along the Y-axis */
+@keyframes slide {
+    0% {
+        opacity: 0;
+        transform: translateY(70%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0%);
+    }
+}
+@-webkit-keyframes slide {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(70%);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: translateY(0%);
+    }
+}
+</style>
+
+<div class="container-fluid" style="background-color:transparent">
+    <div class="text-center" style="font-size: 1em; background-color: transparent; border-radius:0.5em;">
         <div style="padding: 1em;">
             <br />
-            <h1>Services</h1>
-
-            {{
+            <h2 class="slideanim" style="color:white">Services I offer:</h2>
             <br />
+            <div class="container">
+                <div class="row" id="services">
+
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
+
+<script type="text/javascript">
+
+    $(window).scroll(function() {
+  $(".slideanim").each(function(){
+    var pos = $(this).offset().top;
+
+    var winTop = $(window).scrollTop();
+    if (pos < winTop + 600) {
+      $(this).addClass("slide");
+    }
+  });
+});
+
+    var services = document.getElementById('services')
+    document.addEventListener("DOMContentLoaded", function() {
+        var request = new XMLHttpRequest();
+        request.open('GET','http://127.0.0.1:8000/services');
+        request.onload = function() {
+            var data  = JSON.parse(request.responseText);
+            renderHTdML(data);
+        };
+        request.send();
+    });
+
+    function renderHTdML(data) {
+
+        for(var i=0; i<data.length; i++) {
+
+            serviceString = "";
+
+            for (var j = 0; j<data[i].services.length; j++) {
+                serviceString += "<p class=\"card-text\" style=\"color:white\">" + data[i].services[j] + "</p>";
+
+            }
+
+            htmlstring = "<div class=\"col-sm slideanim\"> \
+                             <div class=\"card\" style=\"background-color: rgba(7, 17, 8, 0.8); border-width:0px; border-radius:0px\"> \
+                                <div class=\"card-body\"> \
+                                    <h5 class=\"card-title\" style=\"color:#1A7788\" >"+ data[i].group +"</h5> \
+                                    "+ serviceString + " \
+                                </div> \
+                            </div> \
+                        </div>";
+            services.insertAdjacentHTML('beforeend', htmlstring);
+        }
+
+    }
+
+
+</script>

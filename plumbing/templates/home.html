@@ -3,7 +3,8 @@
 
 
 {% block content %}
-<div class="jumbotron jumbotron-fluid text-center" style="background-image:url({% static "images/bath.jpg" %}); background-size: cover; height:720px;margin-bottom: -4em; align-items: center;">
+
+<div class="jumbotron jumbotron-fluid text-center" style="background-image:url({% static "images/bath.jpg" %}); background-size: cover; height:720px;margin-bottom: -3em; align-items: center;">
 
 
     <div style="background-color: rgba(44, 67, 90, 0.5); margin: auto; width: 30em; transform: translateY(60%);">
@@ -17,13 +18,13 @@
     </div>
 
     <div style="transform: translateY(320%)">
-        <button style="background-color: rgba(255,255,255,0.0); border: 1px solid white; border-radius:5px; padding:0.5em 2em; font-size: 1em; color:white;" type="button">Book a Visit</button>
+        <button style="background-color: rgba(255,255,255,0.1); border: 1px solid white; border-radius:5px; padding:0.5em 2em; font-size: 1em; color:white;" type="button">Book a Visit</button>
     </div>
 
 </div>
 
 
-<nav class="navbar navbar-expand sticky-top navbar-dark" style="background-color: rgba(44, 67, 90, 0.7); height:4em; z-index:0">
+<nav class="navbar navbar-expand sticky-top navbar-dark" style="background-color: rgba(44, 67, 90, 0.7); height:3em; z-index:0">
 
          <div class="collapse navbar-collapse">
              <ul class="navbar-nav mx-auto">
@@ -43,7 +44,7 @@
 </nav>
 
 <div style="background-image:url({% static "images/boiler.jpg" %}); background-size:cover; background-attachment: fixed; background-position: center">
-
+<div style="background: linear-gradient(rgba(7, 17, 8, 0.9),  rgba(7, 17, 8, 0.0));">
     <br>
     <br>
 
@@ -51,20 +52,24 @@
         {% include "qualifications.html" %}
     </div>
 
-    <div class="container">
-        {% include "reviews.html" %}
-    </div>
-
     <br>
     <br>
 </div>
 
+    <div>
+    {% include "_service_list.html" %}
+    </div>
+</div>
 
 
-{% include "_service_list.html" %}
 
 <br>
 
-
+{% include "_contact-form.html" %}
 <!-- end of the content block -->
+
+<br>
+<br>
+
+<br>
 {% endblock %}

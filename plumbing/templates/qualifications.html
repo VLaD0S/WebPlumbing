@@ -11,7 +11,7 @@
 </style>
 
 
-    <div class="text-center" style="font-size: 1em; background-color: rgba(7, 17, 8, 0.8);">
+    <div class="text-center" style="font-size: 1em; background-color: rgba(7, 17, 8, 0.0);">
 
 
         <div style="padding: 2em;">
@@ -19,7 +19,7 @@
             <div>
                 <h3 style="color:white">Who am I?</h3>
                 <br>
-                <h5> I am a <button data-toggle="collapse" data-target="#demo" style="border:0; background-color: transparent;">
+                <h5>I am Florin ,  a<button data-toggle="collapse" data-target="#demo" style="border:0; background-color: transparent;">
                     <span id="Qualifications" class="text-primary">Qualified</span>
                 </button>domestic plumber and gas engineer with over 10 years of experience.</h5>
             </div>
@@ -33,21 +33,25 @@
 
 <script type="text/javascript">
 
+    var demo = document.getElementById('demo')
     document.addEventListener("DOMContentLoaded", function() {
         var request = new XMLHttpRequest();
-        request.open('GET','http://localhost:8000/qualifications');
+        request.open('GET','http://127.0.0.1:8000/qualifications');
         request.onload = function() {
             var data  = JSON.parse(request.responseText);
+            console.log(data);
             renderHTML(data);
         };
         request.send();
     });
 
-    function renderHTML(data) {
-        var htmlstring = "<p style=\"color:#d6d6c2\"><span style=\"color: orange\">// </span>";
 
-        for(i = 0; i <data.length; i++) {
-            htmlstring += data[i].fields.qual + "<span style=\"color: orange\"> // </span>";
+    function renderHTML(data) {
+        var htmlstring = "<p style=\"color:#d6d6c2\"><span style=\"color: orange\"> // </span>"
+
+        for(var i=0; i<data.length; i++) {
+
+            htmlstring += data[i].qualification + "<span style=\"color: orange\"> // </span>";
         }
 
         htmlstring += "</p>";
