@@ -2,7 +2,6 @@ from django.shortcuts import render
 from plumbing.models import Review, Qualification, Group, Service
 from django.views import View
 from django.http import HttpResponse
-from plumbing.forms import ContactForm
 import json
 
 

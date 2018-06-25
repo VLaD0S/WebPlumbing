@@ -16,7 +16,7 @@
 @keyframes slide {
     0% {
         opacity: 0;
-        transform: translateY(70%);
+        transform: translateY(20%);
     }
     100% {
         opacity: 1;
@@ -54,15 +54,14 @@
 <script type="text/javascript">
 
     $(window).scroll(function() {
-  $(".slideanim").each(function(){
-    var pos = $(this).offset().top;
-
-    var winTop = $(window).scrollTop();
-    if (pos < winTop + 600) {
-      $(this).addClass("slide");
-    }
-  });
-});
+        $(".slideanim").each(function(){
+            var pos = $(this).offset().top;
+            var winTop = $(window).scrollTop();
+            if (pos < winTop + 600) {
+                $(this).addClass("slide");
+            }
+        });
+    });
 
     var services = document.getElementById('services')
     document.addEventListener("DOMContentLoaded", function() {
@@ -86,7 +85,7 @@
 
             }
 
-            htmlstring = "<div class=\"col-sm slideanim\"> \
+            htmlstring = "<div class=\"col-md-4 col-sm-12 slideanim\"> \
                              <div class=\"card\" style=\"background-color: rgba(7, 17, 8, 0.8); border-width:0px; border-radius:0px\"> \
                                 <div class=\"card-body\"> \
                                     <h5 class=\"card-title\" style=\"color:#1A7788\" >"+ data[i].group +"</h5> \

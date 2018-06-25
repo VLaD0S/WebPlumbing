@@ -1,12 +1,33 @@
 {% load staticfiles %}
 <style>
 
+    .row-form {
+        padding-bottom: 0.5em;
+    }
+    .form-control {
+        border: 0px;
+        color: rgb(255, 116, 0);
+        border-bottom:1px rbga(0,0,0,0,4);
+        background-color: rgb(19, 33, 67, 0.5);
+    }
+
+    .form-control:focus {
+        border: 0px;
+        background-color: rgb(19, 33, 67, 0.5);
+        box-shadow: inset 0px 1px rgba(0, 0, 0, 0), 0px 2px rgb(19, 33, 67);
+    }
+
+    .form-label p{
+        color: #C1C1C2;
+        text-align: right;
+    }
 </style>
 
-<div class="container" style="width:600px">
+<div class="container " style="width:600px; background-color: rgb(44, 67, 90, 0.5); border-radius: 3px; ">
+    <br>
     <form>
         <div class="row row-form">
-            <div class="col-sm-2">
+            <div class="form-label col-sm-3">
                 <p>name:</p>
             </div>
             <div class="col">
@@ -15,7 +36,7 @@
         </div>
         <div class="row row-form">
 
-            <div class="col-sm-2">
+            <div class="form-label col-sm-3">
                 <p>email:</p>
             </div>
             <div class="col">
@@ -23,11 +44,23 @@
             </div>
         </div>
         <div class="row row-form">
-            <textarea class="form-control" id="description" rows="3"></textarea>
-        </div>
-        <div>
 
+            <div class="form-label col-sm-3">
+                <p>email:</p>
+            </div>
+            <div class="col">
+                <input type="email" class="form-control" placeholder="john.smith@email.com">
+            </div>
         </div>
-
+        <div class="row row-form">
+            <div class="form-label col-sm-3">
+                <p>message: </p>
+                <!--<button class="button-primary" type="submit" style="align: right;">Submit</button>-->
+            </div>
+            <div class="col">
+                <textarea class="form-control" id="description" rows="3" placeholder="Describe your issue here"></textarea>
+            </div>
+        </div>
+    <br>
     </form>
 </div>

@@ -1,0 +1,78 @@
+
+    <script>
+
+      var max = 250;
+      function countChar(val) {
+        var len = val.value.length;
+        if (len >= max) {
+          val.value = val.value.substring(0, max);
+        } else {
+          $('#charNum').text(max - len - 1);
+        }
+      };
+
+    </script>
+<style>
+    .form-meta {
+        width: 400px;
+        background-color: rgb(240,240,240);
+        padding:2em;
+        box-shadow: 0.2em 0.4em rgb(19, 33, 67, 0.6);
+    }
+
+    .form-group label{
+        padding-left:0.8em;
+    }
+
+    .form-control {
+        border: 0px;
+        border-radius: 0px;
+        background-color: transparent;
+    }
+
+     .form-control:focus {
+        border: 0px;
+        background-color: transparent;
+        box-shadow: inset 0px 1px rgba(0, 0, 0, 0), 0px 1px rgb(19, 33, 67, 0.3);
+    }
+
+    .btn {
+        background-color: transparent
+        border: 0px;
+        color:
+    }
+
+</style>
+
+<div class="form-meta">
+    <form>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" placeholder="John Smith">
+
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" placeholder="john.smith@email.com">
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="tel" class="form-control" id="phone" placeholder="07111222333">
+        </div>
+
+        <div class="form-group">
+            <label for="message">Message: (<span id="charNum"><script>document.write(max-1);</script></span>)</label>
+            <textarea class="form-control" maxlength="<script>document.write(max);</script>" onkeyup="countChar(this)" id="message" rows="10" placeholder="text..."></textarea>
+        </div>
+
+        <br>
+        <div class="form-group" style="padding-left:0.5em">
+
+            <button type="submit" class="btn">Submit</button>
+        </div>
+
+    </form>
+</div>
+

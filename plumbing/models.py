@@ -15,14 +15,7 @@ class Contact(models.Model):
     name = models.CharField(max_length=32)
     description = models.TextField(max_length=512)
     email = models.EmailField()
-    phone = models.IntegerField(max_length=10)
-    prefix = models.IntegerField(max_length=2, default=0)
-
-    def __str__(self):
-        if self.prefix == 0:
-            return str(self.name) + ": " + str(self.prefix) + " " + str(self.phone)
-        else:
-            return str(self.name) + ": +" + str(self.prefix) + " " + str(self.phone)
+    phone = models.CharField(max_length=15)
 
 
 class Qualification(models.Model):
