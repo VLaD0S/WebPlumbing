@@ -39,7 +39,7 @@
     <div class="text-center" style="font-size: 1em; background-color: transparent; border-radius:0.5em;">
         <div style="padding: 1em;">
             <br />
-            <h2 class="slideanim" style="color:white">Services I offer:</h2>
+
             <br />
             <div class="container">
                 <div class="row" id="services">
@@ -57,7 +57,7 @@
         $(".slideanim").each(function(){
             var pos = $(this).offset().top;
             var winTop = $(window).scrollTop();
-            if (pos < winTop + 600) {
+            if (pos < winTop + 800) {
                 $(this).addClass("slide");
             }
         });
@@ -81,14 +81,14 @@
             serviceString = "";
 
             for (var j = 0; j<data[i].services.length; j++) {
-                serviceString += "<p class=\"card-text\" style=\"color:white\">" + data[i].services[j] + "</p>";
+                serviceString += "<h5 class=\"card-text\" style=\"color:white\"><span style=\"color: orange\"> | </span>" + data[i].services[j] + "</h5><br>";
 
             }
 
             htmlstring = "<div class=\"col-md-4 col-sm-12 slideanim\"> \
-                             <div class=\"card\" style=\"background-color: rgba(7, 17, 8, 0.8); border-width:0px; border-radius:0px\"> \
+                             <div class=\"card\" style=\"background-color: rgba(7, 17, 8, 0.5); border-width:0px; border-radius:0px\"> \
                                 <div class=\"card-body\"> \
-                                    <h5 class=\"card-title\" style=\"color:#1A7788\" >"+ data[i].group +"</h5> \
+                                    <h3 class=\"card-title\" style=\"color:orange\" >"+ data[i].group +"</h3><br> \
                                     "+ serviceString + " \
                                 </div> \
                             </div> \
