@@ -3,7 +3,9 @@ astroid==1.4.4
 beautifulsoup4==4.6.0
 billiard==3.5.0.3
 celery==4.1.0
+certifi==2018.4.16
 cffi==1.11.2
+chardet==3.0.4
 click==6.7
 colorama==0.3.9
 Django==1.11.6
@@ -13,6 +15,7 @@ django-common-helpers==0.9.1
 ephem==3.7.6.0
 Faker==0.8.6
 Flask==1.0.2
+idna==2.7
 itsdangerous==0.24
 Jinja2==2.10
 kombu==4.1.0
@@ -28,8 +31,10 @@ python-dateutil==2.6.1
 python2==1.2
 pytz==2017.2
 rabbitmq==0.2.0
+requests==2.19.1
 six==1.10.0
 text-unidecode==1.0
+urllib3==1.23
 vine==1.1.4
 virtualenv==15.2.0
 Werkzeug==0.14.1

@@ -1,10 +1,14 @@
 from django import forms
+from captcha.fields import ReCaptchaField
 from .models import Contact
 
 
-class ContactForm(forms.ModelForm):
+class ContactModelForm(forms.ModelForm):
+    def __init__(self):
+        super(ContactModelForm, self).__init__()
+        self.fields['captcha'] = ReCaptchaField()
 
     class Meta:
         model = Contact
-        fields = ('name', 'email', 'prefix', 'description')
+        fields = ['name', 'email', 'phone', 'message']
 

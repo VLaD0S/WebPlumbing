@@ -29,7 +29,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '846f3c58-b4d9-432a-8d1d-087b2b97afa2'
+GOOGLE_RECAPTCHA_SECRET_KEY = '6LdRSRYUAAAAAOnk5yomm1dI9BmQkJWTg_wIlMJ_'
+RECAPTCHA_PUBLIC_KEY = '6Le0zGEUAAAAAIbdrDltj8FAAYe97kuY4Vgjm5Bj'
+RECAPTCHA_PRIVATE_KEY = '6LdRSRYUAAAAAOnk5yomm1dI9BmQkJWTg_wIlMJ_'
 
+RECAPTCHA_PROXY = 'http://127.0.0.1:8000'
+NOCAPTCHA = True
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -42,7 +47,9 @@ INSTALLED_APPS = [
     #custom apps
     'django_celery_results',
     'django_celery_beat',
+    'captcha',
     'plumbing',
+    'widget_tweaks',
     #basics
     'django.contrib.admin',
     'django.contrib.auth',

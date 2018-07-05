@@ -13,7 +13,7 @@ class Review(models.Model):
 
 class Contact(models.Model):
     name = models.CharField(max_length=32)
-    description = models.TextField(max_length=512)
+    message = models.TextField(max_length=512)
     email = models.EmailField()
     phone = models.CharField(max_length=15)
 

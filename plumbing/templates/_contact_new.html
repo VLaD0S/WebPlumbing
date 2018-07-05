@@ -45,33 +45,80 @@
 
 </style>
 
-<div class="form-meta">
-    <form>
+    <form id="contact-form" class="form-meta" method="POST">
+        {% csrf_token %}
         <div class="form-group">
             <label for="name">Name</label>
-            <input type="text" class="form-control" id="name" placeholder="John Smith">
+            <input type="text" class="form-control" id="name" placeholder="John Smith" required>
 
         </div>
 
         <div class="form-group">
-            <label for="email">* Email</label>
-            <input type="email" class="form-control" id="email" placeholder="john.smith@email.com">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" placeholder="john.smith@email.com" required>
         </div>
 
         <div class="form-group">
-            <label for="phone">* Phone </label>
+            <label for="phone">Phone </label>
             <input type="tel" class="form-control" id="phone" placeholder="07111222333">
         </div>
 
         <div class="form-group">
             <label for="message">Message (<span id="charNum"><script>document.write(max-1);</script></span>) :  (optional)</label>
-            <textarea class="form-control" maxlength="<script>document.write(max);</script>" onkeyup="countChar(this)" id="message" rows="10" placeholder="text..."></textarea>
+            <textarea class="form-control" maxlength="<script>document.write(max);</script>" onkeyup="countChar(this)" id="message" rows="10" placeholder="text..." required></textarea>
         </div>
 
         <br>
-        <div class="form-group" style="padding-left:0.5em">
 
-            <button type="submit" class="btn">Submit</button>
+        <div id="sbutton-div" class="form-group" style="padding-left:0.5em">
+
+            <button id="sbutton" type="submit" class="btn">Submit</button>
         </div>
-</div>
 
+
+
+    </form>
+
+
+<script type="text/javascript">
+
+
+
+    function renderFormValidation(data) {
+        console.log(data)
+    }
+
+    $(document).on('submit', '#contact-form' ,function(e) {
+
+        e.preventDefault();
+        $.ajax({
+            type:'POST',
+            url:'/contact/',
+            data: {
+                name:$('#name').val(),
+                email:$('#email').val(),
+                phone:$('#phone').val(),
+                message:$('#message').val(),
+                csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+
+            },
+            success:function(data, response){
+                console.log(data);
+                console.log(data.stat);
+                if (data["stat"] == "ok") {
+                    console.log('it');
+                    $('#sbutton').css('background-color','#05AF1A');
+                    $('#sbutton').css('color','white');
+                    $('#sbutton').html('Done');
+                    $('#sbutton').attr("disabled", true);
+
+                }
+                else {
+
+                }
+            },
+        });
+    });
+
+
+</script>
