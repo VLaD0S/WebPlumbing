@@ -1,0 +1,83 @@
+{% extends "home.html" %}
+{% load staticfiles %}
+{% block main %}
+<div style="background-image:url({% static "images/bathroom.jpg" %}); background-size:cover; background-attachment: fixed; background-position: center">
+    <div style="background: rgba(7, 17, 8, 0.4)">
+        <div class="text-center" style="background: rgba(7, 17, 8, 0.4)">
+            <br>
+            <h1  class="slideanim" style="color:orange">About :</h1>
+            <br>
+        </div>
+        <br>
+        <div class="container">
+            {% include "qualifications.html" %}
+        </div>
+    <br>
+        <br>
+        <div style="background:rgba(7, 17, 8, 0.4)">
+            <br>
+                    <h1 class="slideanim text-center" style="color:orange">Services :</h1>
+            <br>
+        </div>
+
+    </div>
+
+    <div>
+        {% include "_service_list.html" %}
+        <div class="space"></div>
+
+    </div>
+
+
+<div class="graph-paper slideanim">
+    <div style="background-color:rgba(10, 10, 10, 0.4);">
+        <div class="text-center" style="background: rgba(7, 17, 8, 0.4)">
+            <br>
+            <h1  class="slideanim" style="color:orange">Contact</h1>
+            <br>
+        </div>
+
+        <br>
+        <br>
+
+        <div class="row" style="margin:0px;">
+            <div class="col-md-6 col-sm-12">
+                <div class="container text-right" style="color:white; padding:2em">
+
+                    <h2>Let's plan your next project <span style="font-weight:bold; color:orange">together</span></h2>
+
+                    <br>
+
+                    <h2>Ask me for a quote by filling in the <span style="font-weight:bold; color:orange">form</span> provided</h2>
+                    <br>
+
+                    <h2>If you wish to call me directly, send me an email at <span style="font-weight:bold; color:orange">fgnplumbing@gmail.com</span> or call me at <span style="color:orange; font-weight:bold">079166 26619</span></h2>
+
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12" style="padding-left:2em">
+
+                <div id="former" style="-moz-transform: scale(0.5);">
+                {% include "_contact_new.html" %}
+                <!-- end of the content block -->
+                </div>
+            </div>
+
+        </div>
+
+
+    <div class="space"></div>
+    <div class="space"></div>
+    <div class="space"></div>
+    <div class="space"></div>
+    <div class="space"></div>
+    <div class="space"></div>
+
+    </div>
+
+</div>
+
+
+</div>
+
+{% endblock %}

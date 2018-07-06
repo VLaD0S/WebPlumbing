@@ -9,12 +9,12 @@ import json
 class HomeView(View):
 
     def get(self, request):
-        return render(request, 'home.html')
+        return render(request, '_homefile.html')
 
 
 class QualificationView(View):
 
-    def get(self):
+    def get(self, request):
         jsonarr = []
         for qual in Qualification.objects.all():
             jsonarr.append({"qualification": qual.qual})
@@ -24,7 +24,7 @@ class QualificationView(View):
 
 class ServicesView(View):
 
-    def get(self):
+    def get(self, request):
         jsonarr = []
         for gr in Group.objects.all():
             servicelist = []
