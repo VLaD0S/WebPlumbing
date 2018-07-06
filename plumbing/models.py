@@ -1,5 +1,7 @@
 from django.db import models
-
+from django.core.exceptions import ValidationError
+from django import forms
+from django.conf import settings
 
 # Create your models here.
 class Review(models.Model):
@@ -16,6 +18,11 @@ class Contact(models.Model):
     message = models.TextField(max_length=512)
     email = models.EmailField()
     phone = models.CharField(max_length=15)
+
+    def clean(self):
+        if len(self.phone) > 15:
+
+            raise forms.ValidationError(message="ABORT")
 
 
 class Qualification(models.Model):
@@ -44,5 +51,5 @@ class Service(models.Model):
 
 class Image(models.Model):
     namedesc = models.CharField(max_length=(255))
-    img = models.ImageField(upload_to="static/gallery", null=False)
+    img = models.ImageField(upload_to=".", null=False)
 
