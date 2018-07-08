@@ -1,0 +1,85 @@
+{% extends "home.html" %}
+{% load staticfiles %}
+
+{% block main %}
+<style>
+.slideanim {visibility:hidden;}
+.slide {
+    /* The name of the animation */
+    animation-name: slide;
+    -webkit-animation-name: slide;
+    /* The duration of the animation */
+    animation-duration: 1s;
+    -webkit-animation-duration: 1s;
+    /* Make the element visible */
+    visibility: visible;
+}
+
+/* Go from 0% to 100% opacity (see-through) and specify the percentage from when to slide in the element along the Y-axis */
+@keyframes slide {
+    0% {
+        opacity: 0;
+        transform: translateY(20%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0%);
+    }
+}
+@-webkit-keyframes slide {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(70%);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: translateY(0%);
+    }
+}
+</style>
+
+<div class="background" style="background-image:url({% static "images/boiler.jpg" %}); background-size:cover; background-attachment: fixed; background-position: center;">
+    <div style="background:rgba(7, 17, 8, 0.4)">
+        <div style="background:rgba(7, 17, 8, 0.4)">
+            <br>
+                    <h1 class="text-center" style="color:orange">Gallery</h1>
+            <br>
+
+        </div>
+        <br>
+        <br>
+        <div class="container container-fluid main-div">
+            <br>
+            <div class="row">
+                {% for img in images %}
+                    <div class="col slideanim" style="background-image:url({{ img.img.url }}); background-size:cover; height:200px; width:200px; margin-bottom:0.5em;margin-left:0.5em">
+                        
+                        <a href="{{ img.img.url }}">
+                            <div style="height:150px; width:200px"></div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div style="height:20em"></div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    $(window).scroll(function() {
+
+        $(".slideanim").each(function(){
+            var pos = $(this).offset().top;
+            var winTop = $(window).scrollTop();
+            var offset = 500 + ((Math.random()-0.5) * 300)
+            if (pos < winTop + offset) {
+                $(this).addClass("slide");
+            }
+        });
+    });
+
+    $(document).ready(function(){
+        $('.buttons').replaceWith("<button onclick=\"location.href='/'\" type=\"button\" class=\"scroller\">Home</button>")
+    });
+</script>
+{% endblock %}

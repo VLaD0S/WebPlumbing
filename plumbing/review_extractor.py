@@ -15,7 +15,7 @@ def createSoup(url, file):
     return BeautifulSoup(html_content, 'html.parser')
 #End Setup
 
-
+"""
 class GetReviews(self):
     try:
         os.remove(global.reviews_name)
@@ -36,7 +36,7 @@ class GetReviews(self):
             print(review_text.get_text())
             print(review_author.get_text(), " ", review_date.get_text())
 
-
+"""
 
 
     

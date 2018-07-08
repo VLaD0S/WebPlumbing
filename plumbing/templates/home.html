@@ -1,0 +1,135 @@
+{% extends "_base.html" %}
+{% load staticfiles %}
+
+
+{% block content %}
+<style>
+    .space {
+        height:6em;
+    }
+    .graph-paper {
+        background-color: rgb(59, 127, 192, 1.0);
+
+        background-image: -webkit-linear-gradient(rgb(255,255,255,0.5) 2px, transparent 2px), -webkit-linear-gradient(90deg, rgb(255,255,255,0.5) 2px, transparent 2px), -webkit-linear-gradient(rgba(255,255,255,.3) 1px, transparent 1px), -webkit-linear-gradient(90deg, rgba(255,255,255,.3) 1px, transparent 1px);
+        background-image: -moz-linear-gradient(rgb(255,255,255,0.5) 2px, transparent 2px), -moz-linear-gradient(90deg, rgb(255,255,255,0.5) 2px, transparent 2px), -moz-linear-gradient(rgba(255,255,255,.3) 1px, transparent 1px), -moz-linear-gradient(90deg, rgba(255,255,255,.3) 1px, transparent 1px);
+        background-image: -o-linear-gradient(rgb(255,255,255,0.5) 2px, transparent 2px), -o-linear-gradient(90deg, rgb(255,255,255,0.5) 2px, transparent 2px), -o-linear-gradient(rgba(255,255,255,.3) 1px, transparent 1px), -o-linear-gradient(90deg, rgba(255,255,255,.3) 1px, transparent 1px);
+        background-image: -ms-linear-gradient(rgb(255,255,255,0.5) 2px, transparent 2px), -ms-linear-gradient(90deg, rgb(255,255,255,0.5) 2px, transparent 2px), -ms-linear-gradient(rgba(255,255,255,.3) 1px, transparent 1px), -ms-linear-gradient(90deg, rgba(255,255,255,.3) 1px, transparent 1px);
+        background-image: linear-gradient(rgb(255,255,255,0.5) 2px, transparent 2px), linear-gradient(90deg, rgb(255,255,255,0.5) 2px, transparent 2px), linear-gradient(rgba(255,255,255,.3) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.3) 1px, transparent 1px);
+
+        -webkit-background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+        -moz-background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+        background-size: 150x 150px, 150px 150px, 30px 30px, 30px 30px;
+        background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
+    }
+
+  .stuck {
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        bottom: 0px;
+  }
+
+  .scroller {
+        color:rgba(255,255,255,0.7);
+        background:transparent;
+        border:none;
+        padding-top:0.4em;
+        font-size:1.3em;
+        padding-left:0.5em;
+        padding-right:0.5em;
+        text-align:center;
+  }
+
+
+</style>
+<script type="text/javascript">
+
+    function scrollToAnchor(aid){
+        var aTag = $("div[name='"+ aid +"']");
+        var top = aTag.offset().top;
+        var navheight = $(".naver-wrapper").height();
+        var position = top - navheight
+        $('html,body').animate({scrollTop: position},'slow');
+    }
+
+</script>
+
+<div class="jumbotron jumbotron-fluid text-center" style="background-image:url({% static "images/tools.jpg" %}); background-size: cover; height:720px;margin-bottom: -3em; align-items: center;">
+
+
+    <div class="sitecon" style="background-color: rgba(44, 67, 90, 0.6); margin: auto; max-width: 30em; transform: translateY(60%);">
+        <br>
+        <img id="logo" src="{% static "images/fgn.png" %}", style="height: 7em">
+        <div class="text-center">
+            <h2><font color="white">Plumbing & Heating</font></h2>
+        </div>
+        <br>
+    </div>
+
+
+</div>
+
+<div class="naver-wrapper" style="height:3em; background-color:transparent">
+    <div class="naver" style="text-align: center; color: white; background-color: rgba(44, 67, 90, 0.7); width:100%; height:3em; z-index:2;">
+        <div class="buttons" style="padding-right:0.5em">
+            <button onclick="scrollToAnchor('aboutblock')" class="scroller" >About</button>
+            <button onclick="scrollToAnchor('serviceblock')" class="scroller" >Services</button>
+            <button onclick="scrollToAnchor('contactblock')" class="scroller">Contact</button>
+            <button onclick="location.href='/gallery'" type="button" class="scroller">Gallery</button>
+
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(window).scroll(function() {
+        $(".naver").each(function(){
+
+
+            var pos = $(this).offset().top;
+            var winTop = $(window).scrollTop();
+            var backtop = $(".naver-wrapper").offset().top;
+
+            var moving = 0;
+            if (pos < winTop) {
+
+                $(this).addClass("stuck");
+                moving = 1;
+            }
+
+            if (pos < backtop) {
+                $(this).removeClass("stuck")
+
+            }
+
+        });
+    });
+</script>
+<!--
+
+<nav id="navbar" class="navbar navbar-expand sticky-top navbar-dark" style="background-color: rgba(44, 67, 90, 0.7); height:3em; z-index:2; >
+
+         <div class="collapse navbar-collapse">
+             <ul class="navbar-nav mx-auto">
+
+                 <li class="nav-item active">
+                     <a class="nav-link" href="/">Home</a>
+                 </li>
+
+                 <li class="nav-item">
+                     <a class="nav-link " href="#aboutblock">About</a>
+                 </li>
+                 <li class="nav-item">
+                     <a class="nav-link" href="#contactblock">Contact</a>
+                 </li>
+
+             </ul>
+         </div>
+</nav>
+-->
+{% block main %}
+
+{% endblock %}
+
+{% endblock %}
+
+

@@ -1,0 +1,67 @@
+{% load staticfiles %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <!-- Bootstrap stylesheet-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+    <!-- Google Comfortaa font -->
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
+
+    <!-- Boostrap scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+    <style>
+
+        body {
+
+            font-family: 'Comfortaa', cursive;font-family: 'Comfortaa', cursive;
+
+        }
+
+        .navbar {
+        }
+
+        .navbar-nav a {
+            font-size: 1.2em;
+        }
+
+        .navbar-nav li {
+            padding-left:2em;
+            padding-right:2em;
+        }
+
+        .jumbotron-fluid {
+            height: 20em;
+        }
+
+        .card {
+            border-radius: 0.5em;
+        }
+
+        .card img {
+            border-top-left-radius: 0.5em;
+            border-top-right-radius: 0.5em;
+        }
+
+        .service {
+            padding-top:1em;
+    </style>
+
+</head>
+
+
+<body>
+
+    {% block content %}
+    {% endblock %}
+</body>
+
+
+</html>

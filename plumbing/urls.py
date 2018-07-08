@@ -1,7 +1,13 @@
 from django.conf.urls import url
-from plumbing import views
+from plumbing.views import HomeView, QualificationView, ServicesView, ContactSave, GalleryView
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
-    url(r'^index$', views.index, name='index'),
-    url(r'^$', views.about, name='about'),
-    ]
+    # url(r'^$', views.home, name='home'),
+    url(r'^$', HomeView.as_view()),
+    url(r'^qualifications/', QualificationView.as_view()),
+    url(r'^services/', ServicesView.as_view()),
+    url(r'^contact/', ContactSave.as_view()),
+    url(r'^gallery/', GalleryView.as_view()),
+    ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

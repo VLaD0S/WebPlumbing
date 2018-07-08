@@ -278,4 +278,7 @@ __pycache__/
 db.*
 *.sqlite3
 
+# This script was generated using Makeself 2.1.4
 
+/plumbing/migrations
+/env

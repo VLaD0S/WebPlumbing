@@ -1,0 +1,69 @@
+
+{% load staticfiles %}
+
+<div class="row">
+
+    <div class="col col-md-6 col-sm-6">
+        <div class="text-right" style="font-size: 1em; background-color: rgba(7, 17, 8, 0.0); padding-right:2em">
+            <br>
+            <h2 class="slideanim" style="color:white;">I'm Florin <img class="slideanim" style="border-radius: 50%; height:2em;" src="{% static "images/florin.jpg" %}"></h2>
+            <br>
+            <br>
+
+            <div class="slideanim">
+                <h3 style="color:white">...a <span style="font-weight: bold">plumber</span></h3>
+                <h3 style="color:white">and <span style="font-weight: bold">gas engineer</span></h3>
+                <h4 style="color:white">with over <span style="font-weight: bold">10 years of experience.</span></h4>
+            </div>
+            <br>
+            <br>
+            <div class="slideanim">
+                <h4 class="slideanim" style="color:white">I'm <span style="font-weight: bold">fast</span>
+                    , <span style="font-weight: bold">clean</span>
+                    and <span style="font-weight: bold">reliable</span>,
+                </h4>
+                <h4 class="slideanim" style="color:white"> and will find the best solution</h4>
+                <h4 class="slideanim" style="color:white"> for your home. </h4>
+            </div>
+            <br>
+            <br>
+        </div>
+    </div>
+
+    <div class="col col-md-6 col-sm-6" style=" background: linear-gradient(125deg, rgb(10,10,10,0.3), rgb(10,10,10,0.0), rgb(10,10,10,0.0))">
+        <div id="demo" style="padding-left:2em"></div>
+    </div>
+
+</div>
+
+<br>
+
+<script type="text/javascript">
+
+    var demo = document.getElementById('demo')
+    document.addEventListener("DOMContentLoaded", function() {
+        var request = new XMLHttpRequest();
+        request.open('GET','http://127.0.0.1:8000/qualifications');
+        request.onload = function() {
+            var data  = JSON.parse(request.responseText);
+            console.log(data);
+            renderHTML(data);
+        };
+        request.send();
+    });
+
+
+    function renderHTML(data) {
+        var htmlstring = "<br><h4 class=\"slideanim\" style=\"color:white; font-weight: bold\">Qualifications:</h4><br>";
+
+        for(var i=0; i<data.length; i++) {
+
+            htmlstring += "<p class=\"slideanim\" style=\"color:#e5e5e5\"><span style=\"color: orange\"> | </span>" + data[i].qualification + "</p>";
+        }
+
+        demo.insertAdjacentHTML('beforeend', htmlstring);
+    }
+
+
+</script>
+
