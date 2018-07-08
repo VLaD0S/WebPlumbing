@@ -53,3 +53,5 @@ class Image(models.Model):
     namedesc = models.CharField(max_length=(255))
     img = models.ImageField(upload_to=".", null=False)
 
+    def __str__(self):
+        return str(self.img)

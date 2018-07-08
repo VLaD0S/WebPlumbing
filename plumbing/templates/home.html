@@ -21,11 +21,46 @@
         background-size: 150x 150px, 150px 150px, 30px 30px, 30px 30px;
         background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
     }
+
+  .stuck {
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        bottom: 0px;
+  }
+
+  .scroller {
+        color:rgba(255,255,255,0.7);
+        background:transparent;
+        border:none;
+        font-size:1.8em;
+        padding-left:0.5em;
+        padding-right:0.5em;
+        text-align:center;
+  }
+
+
 </style>
+<script type="text/javascript">
+
+    function scrollToAnchor(aid){
+        var aTag = $("div[name='"+ aid +"']");
+        var top = aTag.offset().top;
+        var navheight = $(".naver-wrapper").height();
+        var position = top - navheight
+        $('html,body').animate({scrollTop: position},'slow');
+    }
+
+    $(document).ready(function() {
+        $('.sitecon').click(')
+    });
+
+</script>
+
 <div class="jumbotron jumbotron-fluid text-center" style="background-image:url({% static "images/tools.jpg" %}); background-size: cover; height:720px;margin-bottom: -3em; align-items: center;">
 
 
-    <div style="background-color: rgba(44, 67, 90, 0.6); margin: auto; max-width: 30em; transform: translateY(60%);">
+    <div class="sitecon" style="background-color: rgba(44, 67, 90, 0.6); margin: auto; max-width: 30em; transform: translateY(60%);">
         <br>
         <img id="logo" src="{% static "images/fgn.png" %}", style="height: 7em">
         <div class="text-center">
@@ -34,33 +69,70 @@
         <br>
     </div>
 
-    <div style="transform: translateY(320%)">
-        <button style="background-color: rgba(255,255,255,0.1); border: 1px solid white; border-radius:5px; padding:0.5em 2em; font-size: 1em; color:white;" type="button">Book a Visit</button>
-    </div>
 
 </div>
 
+<div class="naver-wrapper" style="height:3em; background-color:transparent">
+    <div class="naver" style="text-align: center; color: white; background-color: rgba(44, 67, 90, 0.7); width:100%; height:3em; z-index:2;">
+        <div class="buttons" style="padding-right:0.5em">
+            <button onclick="scrollToAnchor('aboutblock')" class="scroller" >About</button>
+            <button onclick="scrollToAnchor('serviceblock')" class="scroller" >Services</button>
+            <button onclick="scrollToAnchor('contactblock')" class="scroller">Contact</button>
+            <button onclick="location.href='/gallery'" type="button" class="scroller">Gallery</button>
 
-<nav class="navbar navbar-expand sticky-top navbar-dark" style="background-color: rgba(44, 67, 90, 0.7); height:3em; z-index:2">
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(window).scroll(function() {
+        $(".naver").each(function(){
+
+
+            var pos = $(this).offset().top;
+            var winTop = $(window).scrollTop();
+            var backtop = $(".naver-wrapper").offset().top;
+
+            var moving = 0;
+            if (pos < winTop) {
+
+                $(this).addClass("stuck");
+                moving = 1;
+            }
+
+            if (pos < backtop) {
+                $(this).removeClass("stuck")
+
+            }
+
+        });
+    });
+</script>
+<!--
+
+<nav id="navbar" class="navbar navbar-expand sticky-top navbar-dark" style="background-color: rgba(44, 67, 90, 0.7); height:3em; z-index:2; >
 
          <div class="collapse navbar-collapse">
              <ul class="navbar-nav mx-auto">
 
                  <li class="nav-item active">
-                     <a class="nav-link" href="#">Home</a>
+                     <a class="nav-link" href="/">Home</a>
                  </li>
 
                  <li class="nav-item">
-                     <a class="nav-link" href="#">About</a>
+                     <a class="nav-link " href="#aboutblock">About</a>
                  </li>
                  <li class="nav-item">
-                     <a class="nav-link" href="#">Contact</a>
+                     <a class="nav-link" href="#contactblock">Contact</a>
                  </li>
+
              </ul>
          </div>
 </nav>
+-->
 {% block main %}
 
 {% endblock %}
 
 {% endblock %}
+
+
