@@ -47,9 +47,7 @@ INSTALLED_APPS = [
     #custom apps
     'django_celery_results',
     'django_celery_beat',
-    'captcha',
     'plumbing',
-    'widget_tweaks',
     #basics
     'django.contrib.admin',
     'django.contrib.auth',
