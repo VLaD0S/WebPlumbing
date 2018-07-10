@@ -1,4 +1,4 @@
-from plumbing.models import Review, Qualification, Group, Service, Contact, Image
+from plumbing.models import review , qualification, group, service, contact, image
 from django.core.exceptions import ValidationError
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -16,7 +16,7 @@ class QualificationView(View):
 
     def get(self, request):
         jsonarr = []
-        for qual in Qualification.objects.all():
+        for qual in qualification.objects.all():
             jsonarr.append({"qualification": qual.qual})
 
         return HttpResponse(json.dumps(jsonarr))
@@ -26,9 +26,9 @@ class ServicesView(View):
 
     def get(self, request):
         jsonarr = []
-        for gr in Group.objects.all():
+        for gr in group.objects.all():
             servicelist = []
-            for serv in Service.objects.all():
+            for serv in service.objects.all():
                 if serv.group.name == gr.name:
                     servicelist.append(serv.service)
 
@@ -48,7 +48,7 @@ class ContactSave(View):
         phone = request.POST['phone']
         message = request.POST['message']
 
-        contact = Contact(
+        cont = contact(
             name=name,
             email=email,
             phone=phone,
@@ -56,8 +56,8 @@ class ContactSave(View):
         )
 
         try:
-            contact.full_clean()
-            contact.save()
+            cont.full_clean()
+            cont.save()
             jsonarr['stat'] = "ok";
 
         except ValidationError as e:
@@ -70,7 +70,7 @@ class ContactSave(View):
 class GalleryView(View):
 
     def get(self, request):
-        images = Image.objects.all()
+        images = image.objects.all()
         return render(request, 'gallery.html', context={'images':images})
 
 

@@ -4,17 +4,14 @@ import django
 import urllib.request
 
 #model imports
-from plumbing.models import Review
+from plumbing.models import review
 
 
 #Celery imports
-from celery import task
 from celery import shared_task
-
 
 #Pulling reviews soup/wget imports
 from bs4 import BeautifulSoup
-import wget
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'WebPlumbing.settings')
 django.setup()
@@ -36,7 +33,7 @@ def createsoup(url):
 
 #creates a review in the database.
 def reviewCreator(desc, auth, dt, rev_no):
-    data = Review.objects.get_or_create(description=desc, author=auth, date=dt)[0]
+    data = review.objects.get_or_create(description=desc, author=auth, date=dt)[0]
     data.save()
     print("...saved review .no: " + str(rev_no))
     return data
@@ -76,7 +73,4 @@ def populate():
 def populate_reviews():
     populate()
     print("Review Table update completed.")
-
-
-
 

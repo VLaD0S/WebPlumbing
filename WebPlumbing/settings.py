@@ -13,11 +13,6 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 import os
 import posixpath
 
-#celery imports
-from celery.schedules import crontab
-
-
-
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -38,16 +33,15 @@ NOCAPTCHA = True
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 
 INSTALLED_APPS = [
     #custom apps
-    'django_celery_results',
-    'django_celery_beat',
     'plumbing',
+    'django_celery_beat',
     #basics
     'django.contrib.admin',
     'django.contrib.auth',
@@ -91,12 +85,23 @@ WSGI_APPLICATION = 'WebPlumbing.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
-
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
+}
+"""
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.environ.get('DB_ENV_DB', 'postgres'),
+        'USER': os.environ.get('DB_ENV_POSTGRES_USER', 'postgres'),
+        'PASSWORD': os.environ.get('DB_ENV_POSTGRES_PASSWORD', 'postgres'),
+        'HOST': os.environ.get('DB_PORT_5432_TCP_ADDR', 'db'),
+        'PORT': os.environ.get('DB_PORT_5432_TCP_PORT', ''),
+    },
 }
 
 
@@ -142,10 +147,25 @@ STATIC_ROOT = posixpath.join(*(BASE_DIR.split(os.path.sep) + ['static']))
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-
+"""
 # Celery & Broker settings
-CELERY_BROKER_URL = "amqp://localhost"
+CELERY_BROKER_URL = 'amqp://admin:mypass@localhost//'
 CELERY_RESULTS_BACKEND = "amqp://localhost" 
+"""
+
+#RABBIT_MQ settings
+RABBIT_HOSTNAME = os.environ.get('RABBIT_PORT_5672_TCP', 'rabbit')
+
+
+CELERY_BROKER_URL = 'amqp://{user}:{password}@{hostname}/{vhost}/'.format(
+        user=os.environ.get('RABBIT_ENV_USER', 'admin'),
+        password=os.environ.get('RABBIT_ENV_RABBITMQ_PASS', 'mypass'),
+        hostname=RABBIT_HOSTNAME,
+        vhost=os.environ.get('RABBIT_ENV_VHOST', ''))
+CELERY_RESULTS_BACKEND = "amqp://localhost"
+
+
+
 
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_RESULT_SERIALIZER = 'json'
