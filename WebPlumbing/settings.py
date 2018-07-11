@@ -41,7 +41,6 @@ ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
     #custom apps
     'plumbing',
-    'django_celery_beat',
     #basics
     'django.contrib.admin',
     'django.contrib.auth',
@@ -93,17 +92,16 @@ DATABASES = {
     }
 }
 """
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ.get('DB_ENV_DB', 'postgres'),
-        'USER': os.environ.get('DB_ENV_POSTGRES_USER', 'postgres'),
-        'PASSWORD': os.environ.get('DB_ENV_POSTGRES_PASSWORD', 'postgres'),
-        'HOST': os.environ.get('DB_PORT_5432_TCP_ADDR', 'db'),
-        'PORT': os.environ.get('DB_PORT_5432_TCP_PORT', ''),
-    },
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'HOST': 'db',
+        'PORT': 5432,
+    }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators

@@ -6,16 +6,12 @@ volumes:
 
 services:
   db:
-    image: postgres:9
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=postgres
+    image: postgres
     volumes:
       - db-data:/var/lib/postgresql/db-data
     ports:
       - "5432:5432"
-
+  
   rabbit:
     hostname: rabbit
     image: rabbitmq:3-management
@@ -36,6 +32,8 @@ services:
       - .:/app
     ports:
       - "8000:8000"
+    links:
+      - db
     depends_on:
       - db
 

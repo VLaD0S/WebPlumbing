@@ -11,6 +11,7 @@ WORKDIR /usr/src/app
 COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 RUN pip install pillow
+RUN pip install psycopg2-binary
 
 COPY . /usr/src/app
 

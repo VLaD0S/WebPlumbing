@@ -3,9 +3,9 @@ from django import forms
 
 # Create your models here.
 class review(models.Model):
-    description = models.CharField(max_length=512)
-    author = models.CharField(max_length=16)
-    date = models.CharField(max_length=16)
+    description = models.CharField(max_length=1024)
+    author = models.CharField(max_length=1024)
+    date = models.CharField(max_length=24)
 
     def __str__(self):
         return self.description

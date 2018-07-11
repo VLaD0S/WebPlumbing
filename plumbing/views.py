@@ -1,4 +1,4 @@
-from plumbing.models import review , qualification, group, service, contact, image
+from plumbing.models import review, qualification, group, service, contact, image
 from django.core.exceptions import ValidationError
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -9,7 +9,11 @@ import json
 class HomeView(View):
 
     def get(self, request):
-        return render(request, '_homefile.html')
+        all_reviews = review.objects.all();
+        context = {
+            'reviews':all_reviews,
+        }
+        return render(request, '_homefile.html', context=context)
 
 
 class QualificationView(View):
