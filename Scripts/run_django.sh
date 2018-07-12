@@ -1,12 +1,16 @@
 #!/usr/bin/env bash
 
-sleep 10
+echo "Starting.."
+sleep 20
+echo "..success!"
 
-echo "Starting app. Migrating"
-python manage.py migrate
-python manage.py makemigrations
-python manage.py migrate
+echo "Making plumbing migrations.."
+python manage.py makemigrations plumbing
+echo "..and applying plumbing migrations.."
+python manage.py migrate plumbing
+echo "..finished."
 
-echo "Finished migration. starting server..."
+echo "Attempting to start server.."
 python manage.py runserver 0.0.0.0:8000
+
 

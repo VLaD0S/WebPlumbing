@@ -1,4 +1,4 @@
-version: "3"
+version: '3'
 
 volumes:
   db-data:
@@ -6,17 +6,12 @@ volumes:
 
 services:
   db:
-    image: postgres:10
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=postgres
+    image: postgres
     volumes:
-      - db-data:/var/lib/postgrresql/db-data
+      - db-data:/var/lib/postgresql/db-data
     ports:
       - "5432:5432"
-
-
+  
   rabbit:
     hostname: rabbit
     image: rabbitmq:3-management
@@ -26,8 +21,23 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
-      
-  celeryworker:
+    
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    hostname: web
+    command: ./Scripts/run_django.sh
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    links:
+      - db
+    depends_on:
+      - db
+
+  worker:
     build:
       context: .
       dockerfile: Dockerfile
@@ -35,38 +45,25 @@ services:
     volumes: 
       - .:/usr/src/app
     links:
-      - db
       - rabbit
+      - db
     depends_on:
       - rabbit
-
-  celerybeat:
+      - beat
+      - db
+      - app
+  beat:
     build:
       context: .
       dockerfile: Dockerfile
-    command: ./Scripts/run_celerybeat.sh
+    command: ./Scripts/run_beat.sh
     volumes:
       - .:/usr/src/app
     links:
       - rabbit
-      - celeryworker
+      - db
     depends_on:
       - rabbit
       - db
-
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    hostname: plumbing
-    command: ./Scripts/run_django.sh
-    volumes:
-      - .:/usr/src/app
-    ports:
-      - "8000:8000"
-    depends_on:
-      - db
-
-
-
+      - app
 

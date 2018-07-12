@@ -13,11 +13,6 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 import os
 import posixpath
 
-#celery imports
-from celery.schedules import crontab
-
-
-
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -40,12 +35,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+
 # Application definition
 
 INSTALLED_APPS = [
     #custom apps
-    'django_celery_results',
-    'django_celery_beat',
     'plumbing',
     #basics
     'django.contrib.admin',
@@ -90,29 +84,24 @@ WSGI_APPLICATION = 'WebPlumbing.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
-
-''' # DEFAULT DB CONFIGURATION
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-'''
+"""
 
-#POSTGRES DB CONFIGURATION
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ.get('DB_ENV_DB', 'postgres'),
-        'USER': os.environ.get('DB_ENV_POSTGRES_USER', 'postgres'),
-        'PASSWORD': os.environ.get('DB_ENV_POSTGRES_PASSWORD', 'postgres'),
-        'HOST': os.environ.get('DB_PORT_5432_TCP_ADDR', 'db'),
-        'PORT': os.environ.get('DB_PORT_5432_TCP_PORT', ''),
-    },
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'HOST': 'db',
+        'PORT': 5432,
+    }
 }
-
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
@@ -151,26 +140,28 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
-
-
 STATIC_ROOT = posixpath.join(*(BASE_DIR.split(os.path.sep) + ['static']))
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+"""
+# Celery & Broker settings
+CELERY_BROKER_URL = 'amqp://admin:mypass@localhost//'
+CELERY_RESULTS_BACKEND = "amqp://localhost" 
+"""
+
 #RABBIT_MQ settings
 RABBIT_HOSTNAME = os.environ.get('RABBIT_PORT_5672_TCP', 'rabbit')
 
 
-# Celery & Broker settings
-#CELERY_BROKER_URL = "amqp://localhost"
-#attempt 3
 CELERY_BROKER_URL = 'amqp://{user}:{password}@{hostname}/{vhost}/'.format(
         user=os.environ.get('RABBIT_ENV_USER', 'admin'),
         password=os.environ.get('RABBIT_ENV_RABBITMQ_PASS', 'mypass'),
         hostname=RABBIT_HOSTNAME,
         vhost=os.environ.get('RABBIT_ENV_VHOST', ''))
-CELERY_RESULTS_BACKEND = "amqp://localhost" 
+CELERY_RESULTS_BACKEND = "amqp://localhost"
+
 
 
 
