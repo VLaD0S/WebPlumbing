@@ -40,21 +40,26 @@
         text-align:center;
   }
 
+  .buttons {
+        padding-rigth:0px;
+  }
+
+  .navline {
+        padding-bottom:1em;
+  }
+
+  @media screen and ( max-width: 850px ) {
+        .scroller {
+            width 80%;
+            padding-left: 0px;
+            padding-right:0px;
+        }
+  }
 
 </style>
-<script type="text/javascript">
 
-    function scrollToAnchor(aid){
-        var aTag = $("div[name='"+ aid +"']");
-        var top = aTag.offset().top;
-        var navheight = $(".naver-wrapper").height();
-        var position = top - navheight
-        $('html,body').animate({scrollTop: position},'slow');
-    }
 
-</script>
-
-<div class="jumbotron jumbotron-fluid text-center" style="background-image:url({% static "images/tools.jpg" %}); background-size: cover; height:720px;margin-bottom: -3em; align-items: center;">
+<div class="pannel jumbotron jumbotron-fluid text-center" style="background-image:url({% static "images/tools.jpg" %}); background-size: cover; height:720px;margin-bottom: -3em; align-items: center;">
 
 
     <div class="sitecon" style="background-color: rgba(44, 67, 90, 0.6); margin: auto; max-width: 30em; transform: translateY(60%);">
@@ -71,15 +76,17 @@
 
 <div class="naver-wrapper" style="height:3em; background-color:transparent">
     <div class="naver" style="text-align: center; color: white; background-color: rgba(44, 67, 90, 0.7); width:100%; height:3em; z-index:2;">
-        <div class="buttons" style="padding-right:0.5em">
-            <button onclick="scrollToAnchor('aboutblock')" class="scroller" >About</button>
-            <button onclick="scrollToAnchor('serviceblock')" class="scroller" >Services</button>
-            <button onclick="scrollToAnchor('contactblock')" class="scroller">Contact</button>
+        <div class="buttons">
+            <button onclick="scrollToAnchor('aboutblock')" class="scroller" >About</button> <span class="navline">-</span>
+            <button onclick="scrollToAnchor('serviceblock')" class="scroller" >Services</button> <span class="navline">-</span>
+            <button onclick="scrollToAnchor('contactblock')" class="scroller">Contact</button> <span class="navline">-</span>
             <button onclick="location.href='/gallery'" type="button" class="scroller">Gallery</button>
 
         </div>
     </div>
 </div>
+
+
 <script type="text/javascript">
     $(window).scroll(function() {
         $(".naver").each(function(){
@@ -103,6 +110,14 @@
 
         });
     });
+
+    function scrollToAnchor(aid){
+        var aTag = $("div[name='"+ aid +"']");
+        var top = aTag.offset().top;
+        var navheight = $(".naver-wrapper").height();
+        var position = top - navheight
+        $('html,body').animate({scrollTop: position},'slow');
+    }
 </script>
 <!--
 
@@ -126,6 +141,7 @@
          </div>
 </nav>
 -->
+
 {% block main %}
 
 {% endblock %}
