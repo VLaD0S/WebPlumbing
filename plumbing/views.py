@@ -25,6 +25,24 @@ class QualificationView(View):
 
         return HttpResponse(json.dumps(jsonarr))
 
+class ReviewView(View):
+
+    def get(self, request):
+        jsonarr = []
+        for rev in review.objects.all():
+            description = ""
+            if len(rev.description) > 256:
+                description = rev.description[:252] + "..."
+            else:
+                description = rev.description
+
+            jsonarr.append({"description": description,
+                            "author": rev.author,
+                            "date": rev.date,
+                            })
+
+        return HttpResponse(json.dumps(jsonarr))
+
 
 class ServicesView(View):
 

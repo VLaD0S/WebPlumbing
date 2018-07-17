@@ -7,20 +7,7 @@
     .space {
         height:6em;
     }
-    .graph-paper {
-        background-color: rgb(59, 127, 192, 1.0);
 
-        background-image: -webkit-linear-gradient(rgb(255,255,255,0.5) 2px, transparent 2px), -webkit-linear-gradient(90deg, rgb(255,255,255,0.5) 2px, transparent 2px), -webkit-linear-gradient(rgba(255,255,255,.3) 1px, transparent 1px), -webkit-linear-gradient(90deg, rgba(255,255,255,.3) 1px, transparent 1px);
-        background-image: -moz-linear-gradient(rgb(255,255,255,0.5) 2px, transparent 2px), -moz-linear-gradient(90deg, rgb(255,255,255,0.5) 2px, transparent 2px), -moz-linear-gradient(rgba(255,255,255,.3) 1px, transparent 1px), -moz-linear-gradient(90deg, rgba(255,255,255,.3) 1px, transparent 1px);
-        background-image: -o-linear-gradient(rgb(255,255,255,0.5) 2px, transparent 2px), -o-linear-gradient(90deg, rgb(255,255,255,0.5) 2px, transparent 2px), -o-linear-gradient(rgba(255,255,255,.3) 1px, transparent 1px), -o-linear-gradient(90deg, rgba(255,255,255,.3) 1px, transparent 1px);
-        background-image: -ms-linear-gradient(rgb(255,255,255,0.5) 2px, transparent 2px), -ms-linear-gradient(90deg, rgb(255,255,255,0.5) 2px, transparent 2px), -ms-linear-gradient(rgba(255,255,255,.3) 1px, transparent 1px), -ms-linear-gradient(90deg, rgba(255,255,255,.3) 1px, transparent 1px);
-        background-image: linear-gradient(rgb(255,255,255,0.5) 2px, transparent 2px), linear-gradient(90deg, rgb(255,255,255,0.5) 2px, transparent 2px), linear-gradient(rgba(255,255,255,.3) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.3) 1px, transparent 1px);
-
-        -webkit-background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
-        -moz-background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
-        background-size: 150x 150px, 150px 150px, 30px 30px, 30px 30px;
-        background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
-    }
 
   .stuck {
         position: fixed;
@@ -45,7 +32,7 @@
   }
 
   .navline {
-        padding-bottom:1em;
+        color:orange;
   }
 
   .about {
@@ -54,6 +41,9 @@
 
   .qualifications {
         text-align: left;
+  }
+  .reviews {
+     margin-left:4em; margin-right:4em; padding-left:4em;padding-right:4em
   }
 
   @media screen and ( max-width: 850px ) {
@@ -69,6 +59,12 @@
 
         .qualifications {
             text-align: center;
+        }
+
+        .reviews {
+            margin:0px;
+            padding-left:10px;
+            padding-right:10px;
         }
 
   }
