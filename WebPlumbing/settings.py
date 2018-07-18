@@ -34,7 +34,6 @@ ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
     #custom apps
     'plumbing',
-    'snowpenguin.django.recaptcha2',
     #basics
     'django.contrib.admin',
     'django.contrib.auth',
@@ -77,7 +76,6 @@ WSGI_APPLICATION = 'WebPlumbing.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 """
 DATABASES = {
     'default': {
@@ -85,8 +83,8 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 """
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',

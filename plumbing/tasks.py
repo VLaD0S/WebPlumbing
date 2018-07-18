@@ -35,7 +35,7 @@ def createsoup(url):
 def reviewCreator(desc, auth, dt, rev_no):
     data = review.objects.get_or_create(description=desc, author=auth, date=dt)[0]
     data.save()
-    print("...saved review .no: " + str(rev_no))
+
     return data
 
 
@@ -50,7 +50,10 @@ def tempdelete(file):
 
 #logic populating the database with reviews
 def populate():
+    print('Fetching HTML page...', end="", flush=True)
     review_box, tempfile_name = createsoup(mybuilder_url)
+    print('Done')
+    print('Extracting reviews...')
     count = 0
     for review in review_box:
 
@@ -66,8 +69,10 @@ def populate():
 
         count = count + 1
 
-    tempdelete(tempfile_name)
+        print('review: {} '.format(count), end='\r')
 
+    tempdelete(tempfile_name)
+    print("Done")
 
 @shared_task(name="populate_reviews")
 def populate_reviews():

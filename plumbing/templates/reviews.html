@@ -32,7 +32,7 @@
     var reviews = document.getElementById('review-block')
     document.addEventListener("DOMContentLoaded", function() {
         var request = new XMLHttpRequest();
-        request.open('GET','http://178.128.41.229:8000/reviews');
+        request.open('GET','http://localhost:8000/reviews');
         request.onload = function() {
             var data  = JSON.parse(request.responseText);
             console.log(data);

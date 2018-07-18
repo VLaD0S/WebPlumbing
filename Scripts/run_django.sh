@@ -11,6 +11,8 @@ python manage.py migrate plumbing
 echo "..finished."
 
 echo "Attempting to start server.."
-python manage.py runserver 0.0.0.0:8000
+gunicorn WebPlumbing.wsgi \
+    --bind 0.0.0.0:8000 \
+    --workers 3
 
 

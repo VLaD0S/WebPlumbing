@@ -21,7 +21,9 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
-    
+    depends_on:
+      - db
+
   app:
     build:
       context: .
@@ -30,10 +32,9 @@ services:
     command: ./Scripts/run_django.sh
     volumes:
       - .:/app
-    ports:
-      - "8000:8000"
-    links:
-      - db
+      - /static:/static
+    expose:
+      - "8000"
     depends_on:
       - db
 
@@ -45,13 +46,10 @@ services:
     volumes: 
       - .:/usr/src/app
     links:
-      - rabbit
-      - db
-    depends_on:
-      - rabbit
-      - beat
-      - db
       - app
+    depends_on:
+      - beat
+  
   beat:
     build:
       context: .
@@ -60,10 +58,17 @@ services:
     volumes:
       - .:/usr/src/app
     links:
-      - rabbit
       - db
     depends_on:
       - rabbit
-      - db
-      - app
 
+  nginx:
+    image: nginx:latest
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/usr/src/app
+      - ./nginx:/etc/nginx/conf.d
+      - /static:/static
+    depends_on:
+      - app
