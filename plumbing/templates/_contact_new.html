@@ -1,5 +1,5 @@
 
-    <script>
+<script>
 
       var max = 250;
       function countChar(val) {
@@ -10,11 +10,11 @@
           $('#charNum').text(max - len - 1);
         }
       };
-    </script>
+</script>
 <style>
     .form-meta {
         width: auto;
-        background-color: rgb(240,240,240, 0.8);
+        background-color: rgb(200,200,200);
         padding:2em;
         box-shadow: 0.2em 0.4em rgb(19, 33, 67, 0.6);
         z-index: 1;
@@ -70,6 +70,9 @@
             <textarea class="form-control" maxlength="<script>document.write(max);</script>" onkeyup="countChar(this)" id="message" rows="4" placeholder="Write your message here..." required></textarea>
         </div>
         <br>
+
+        <div class="capcher">
+        </div>
 
         <div id="sbutton-div" class="none" style="padding-left:0.5em">
 

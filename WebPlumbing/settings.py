@@ -13,8 +13,6 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 import os
 import posixpath
 
-
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -24,12 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '846f3c58-b4d9-432a-8d1d-087b2b97afa2'
-GOOGLE_RECAPTCHA_SECRET_KEY = '6LdRSRYUAAAAAOnk5yomm1dI9BmQkJWTg_wIlMJ_'
-RECAPTCHA_PUBLIC_KEY = '6Le0zGEUAAAAAIbdrDltj8FAAYe97kuY4Vgjm5Bj'
-RECAPTCHA_PRIVATE_KEY = '6LdRSRYUAAAAAOnk5yomm1dI9BmQkJWTg_wIlMJ_'
 
-RECAPTCHA_PROXY = 'http://127.0.0.1:8000'
-NOCAPTCHA = True
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -41,6 +34,7 @@ ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
     #custom apps
     'plumbing',
+    'snowpenguin.django.recaptcha2',
     #basics
     'django.contrib.admin',
     'django.contrib.auth',
@@ -145,16 +139,12 @@ STATIC_ROOT = posixpath.join(*(BASE_DIR.split(os.path.sep) + ['static']))
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-"""
-# Celery & Broker settings
-CELERY_BROKER_URL = 'amqp://admin:mypass@localhost//'
-CELERY_RESULTS_BACKEND = "amqp://localhost" 
-"""
+
 
 #RABBIT_MQ settings
 RABBIT_HOSTNAME = os.environ.get('RABBIT_PORT_5672_TCP', 'rabbit')
 
-
+# Celery & Broker settings
 CELERY_BROKER_URL = 'amqp://{user}:{password}@{hostname}/{vhost}/'.format(
         user=os.environ.get('RABBIT_ENV_USER', 'admin'),
         password=os.environ.get('RABBIT_ENV_RABBITMQ_PASS', 'mypass'),
