@@ -2,8 +2,8 @@
 
 sleep 3
 echo "deleting celerybeat.pid"
-su -m myuser -c "rm celerybeat.pid"
-su -m myuser -c "celery -A WebPlumbing beat"
+rm celerybeat.pid
+celery -A WebPlumbing beat
 echo "beat started"
 
 

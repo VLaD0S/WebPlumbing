@@ -7,6 +7,7 @@ volumes:
 services:
   db:
     image: postgres
+    env_file: .env
     volumes:
       - db-data:/var/lib/postgresql/db-data
     ports:
@@ -29,6 +30,7 @@ services:
       context: .
       dockerfile: Dockerfile
     hostname: web
+    env_file: .env
     command: ./Scripts/run_django.sh
     volumes:
       - .:/app
@@ -41,6 +43,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    env_file: .env
     command: ./Scripts/run_celery.sh
     volumes: 
       - .:/usr/src/app
@@ -54,6 +57,7 @@ services:
       context: .
       dockerfile: Dockerfile
     command: ./Scripts/run_beat.sh
+    env_file: .env
     volumes:
       - .:/usr/src/app
     links:
