@@ -19,9 +19,20 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
+"""
+DEPLOYMENT JARGAN
+"""
+SECURE_CONTENT_TYPE_NOSNIFF=True
+SECURE_BROWSER_XSS_FILTER=True
+CSRF_COOKIE_SECURE=True
+# since data is self-referenced from other views, this has to stay at SAMEORIGIN.
+#X_FRAME_OPTIONS='DENY'
+SESSION_COOKIE_SECURE=True
+
+
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '846f3c58-b4d9-432a-8d1d-087b2b97afa2'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
