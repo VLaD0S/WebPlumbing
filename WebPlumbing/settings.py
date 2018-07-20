@@ -32,10 +32,18 @@ SESSION_COOKIE_SECURE=True
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY='5er3-+1et53nb45jtfcodh7r$eo@pdt!=e_978a)3%iqh0iv61'
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'fgnworks@gmail.com'
+EMAIL_HOST_PASSWORD = "fGnplumb1ng@ndheating3mail"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
 
 ALLOWED_HOSTS = ['*', 'fgnplumbing.co.uk']
 
@@ -87,7 +95,7 @@ WSGI_APPLICATION = 'WebPlumbing.wsgi.application'
 
 
 # Database
-"""
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -106,7 +114,7 @@ DATABASES = {
         'PORT': 5432,
     }
 }
-
+"""
 
 
 # Password validation

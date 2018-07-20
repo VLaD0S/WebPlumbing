@@ -15,7 +15,13 @@ app.conf.beat_schedule = {
         'task': 'populate_reviews',
         'schedule': 300.0,
     },
+
+    'send_self_60s' : {
+        'task': 'send_self',
+        'schedule':60.0,
+    },
 }
+
 
 @app.task(bind=True)
 def debug_task(self):
