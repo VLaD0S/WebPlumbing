@@ -8,7 +8,6 @@ echo "Making plumbing migrations.."
 python manage.py makemigrations plumbing
 echo "..and applying plumbing migrations.."
 python manage.py migrate plumbing
-python manage.py migrate
 echo "..finished."
 
 echo "Attempting to start server.."

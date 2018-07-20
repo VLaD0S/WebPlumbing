@@ -47,8 +47,10 @@ services:
     command: ./Scripts/run_celery.sh
     volumes: 
       - .:/usr/src/app
-    depends_on:
+    links:
       - app
+    depends_on:
+      - beat
   
   beat:
     build:

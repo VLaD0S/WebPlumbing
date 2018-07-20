@@ -24,7 +24,7 @@ DEPLOYMENT JARGAN
 """
 SECURE_CONTENT_TYPE_NOSNIFF=True
 SECURE_BROWSER_XSS_FILTER=True
-CSRF_COOKIE_SECURE=True
+# CSRF_COOKIE_SECURE=True
 # since data is self-referenced from other views, this has to stay at SAMEORIGIN.
 #X_FRAME_OPTIONS='DENY'
 SESSION_COOKIE_SECURE=True
@@ -35,9 +35,9 @@ SESSION_COOKIE_SECURE=True
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*', 'fgnplumbing.co.uk']
 
 
 # Application definition
