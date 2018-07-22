@@ -79,7 +79,7 @@ def send_contact_email(contact):
     from_email = settings.EMAIL_HOST_USER
     to_email = [contact.email]
     message = "Hi " + contact.name + "!\n"
-    message += "Thank you for contacting me. I will contact you at my earliest available time.\n Below is a copy of your message:\n \n"
+    message += "Thank you for contacting me. I will reply at my earliest available time.\n Below is a copy of your message:\n \n"
     message += contact.message + "\n \n"
     message += "Please do not reply at this message. \n http://fgnplumbing.co.uk"
     send_mail(subject=subject, from_email=from_email, message=message, recipient_list=to_email, fail_silently=False)
@@ -104,13 +104,13 @@ def send_self():
         if cont.initiate == False:
             did = True
             query_no = get_incrementer()
-            subject = "Q:" + str(query_no) +". " +str(cont.name)
+            subject = "Q:" + str(query_no) +". From:" +str(cont.name)
             from_email = settings.EMAIL_HOST_USER
-            to_email = ['tudorvladneacsu@outlook.com']
+            to_email = ['fgnplumbing@gmail.com']
             message = "Query Number: " + str(query_no) + "\n"
-            message += str(cont.name) + " : name\n"
-            message += str(cont.email) + " : email\n"
-            message += str(cont.phone) + " : phone\n"
+            message += "New message from: " + str(cont.name) + "\n"
+            message += "email: " + str(cont.email) + "\n"
+            message += "phone: " + str(cont.phone) + "\n"
             message += "Message: \n"
             message += str(cont.message)
             send_mail(subject=subject, from_email=from_email, message=message, recipient_list=to_email,
