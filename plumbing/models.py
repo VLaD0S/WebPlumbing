@@ -16,6 +16,7 @@ class contact(models.Model):
     message = models.TextField(max_length=512)
     email = models.EmailField()
     phone = models.CharField(max_length=15)
+    initiate = models.BooleanField(default=False)
 
     def clean(self):
         if len(self.phone) > 15:
@@ -53,3 +54,8 @@ class image(models.Model):
 
     def __str__(self):
         return str(self.img)
+
+
+class incrementer(models.Model):
+    name = models.CharField(null=False, max_length=36)
+    value = models.IntegerField(max_length=8)

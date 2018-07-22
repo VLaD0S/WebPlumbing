@@ -1,4 +1,5 @@
 from plumbing.models import review, qualification, group, service, contact, image
+from plumbing.tasks import send_contact_email
 from django.core.exceptions import ValidationError
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -80,7 +81,7 @@ class ContactSave(View):
             cont.full_clean()
             cont.save()
             jsonarr['stat'] = "ok";
-
+            send_contact_email(cont)
         except ValidationError as e:
             jsonarr['stat'] = "error"
             jsonarr['errors'] = e.message_dict
