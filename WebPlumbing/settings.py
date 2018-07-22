@@ -27,22 +27,25 @@ SECURE_BROWSER_XSS_FILTER=True
 # CSRF_COOKIE_SECURE=True
 # since data is self-referenced from other views, this has to stay at SAMEORIGIN.
 #X_FRAME_OPTIONS='DENY'
-SESSION_COOKIE_SECURE=True
+#SESSION_COOKIE_SECURE=True
 
 
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY='5er3-+1et53nb45jtfcodh7r$eo@pdt!=e_978a)3%iqh0iv61'
+SECRET_KEY=os.environ.get('SECRET_KEY')
 
-
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'fgnworks@gmail.com'
-EMAIL_HOST_PASSWORD = "fGnplumb1ng@ndheating3mail"
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
+EMAIL_HOST = os.environ.get('EMAIL_HOST')
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HSOT_PASSWORD')
+EMAIL_PORT = os.environ.get('EMAIL_PORT')
+EMAIL_USE_TLS=True
+
+EMAIL_HOST='smtp.gmail.com'
+EMAIL_HOST_USER='fgnworks@gmail.com'
+EMAIL_HOST_PASSWORD='fGnplumb1ng@ndheating3mail'
+EMAIL_PORT=587
+EMAIL_USE_TLS=True
 
 
 ALLOWED_HOSTS = ['*', 'fgnplumbing.co.uk']
@@ -95,7 +98,7 @@ WSGI_APPLICATION = 'WebPlumbing.wsgi.application'
 
 
 # Database
-
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -114,7 +117,7 @@ DATABASES = {
         'PORT': 5432,
     }
 }
-"""
+
 
 
 # Password validation
@@ -163,7 +166,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 #RABBIT_MQ settings
-RABBIT_HOSTNAME = os.environ.get('RABBIT_PORT_5672_TCP')
+RABBIT_HOSTNAME = os.environ.get('RABBIT_PORT_5672_TCP', 'rabbit')
 
 # Celery & Broker settings
 
@@ -188,11 +191,4 @@ CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'Europe/London'
-'''
-CELERY_BEAT_SCHEDULE = {
-    'task-number-one': {
-        'task': 'plumbing.tasks.populate_reviews',
-        'schedule': crontab(minute='*/1')
-    }
-}
-'''
+

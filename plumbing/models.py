@@ -58,4 +58,8 @@ class image(models.Model):
 
 class incrementer(models.Model):
     name = models.CharField(null=False, max_length=36)
-    value = models.IntegerField(max_length=8)
+    value = models.IntegerField(default=0)
+
+    def __str__(self):
+        return (str(self.name) + ": " +setr(self.value))
+

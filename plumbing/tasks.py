@@ -85,10 +85,14 @@ def send_contact_email(contact):
     send_mail(subject=subject, from_email=from_email, message=message, recipient_list=to_email, fail_silently=False)
 
 def get_incrementer():
-    incr = incrementer.get_or_create(name="email_incrementer", value=0)
-    incr.value, querynumber = int(incr.value) + 1
-    incr.save()
-    return querynumber
+    if not incrementer.objects.filter(name='query_counter').exists():
+       inc = incrementer(name='query_counter', value=0)
+       inc.save()
+    inc = incrementer.objects.get(name='query_counter')
+    inc.value += 1
+    query = inc.value
+    inc.save()
+    return query
 
 
 
@@ -112,6 +116,8 @@ def send_self():
             send_mail(subject=subject, from_email=from_email, message=message, recipient_list=to_email,
                       fail_silently=False)
             email_logger += 1
+            cont.initiate = True
+            cont.save()
     if did == True:
         print("Sent "+str(email_logger)+" new emails at " + str(datetime.now()))
 

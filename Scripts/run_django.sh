@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 echo "Starting.."
-sleep 20
+sleep 5
 echo "..success!"
 
 echo "Making plumbing migrations.."
